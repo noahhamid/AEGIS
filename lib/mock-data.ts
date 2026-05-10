@@ -1,5 +1,44 @@
-import { InventoryItem } from "@/components/inventory-table"
-import { AlertItem } from "@/components/alert-card"
+// Type definitions
+export interface InventoryItem {
+  id: string;
+  productName: string;
+  batchCode: string;
+  quantity: number;
+  unit: string;
+  manufactureDate: string;
+  expiryDate: string;
+  daysUntilExpiry: number;
+  riskLevel: 'critical' | 'warning' | 'safe';
+  location: string;
+}
+
+export interface AlertItem {
+  id: string;
+  type: 'critical' | 'warning' | 'info';
+  title: string;
+  message: string;
+  timestamp: string;
+  batchCode: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'Admin' | 'Manager' | 'Staff';
+  status: 'active' | 'inactive';
+  lastActive: string;
+  avatar: string;
+}
+
+export interface AuditLog {
+  id: string;
+  action: string;
+  description: string;
+  user: string;
+  timestamp: string;
+  details: Record<string, any>;
+}
 
 export const inventoryItems: InventoryItem[] = [
   {
@@ -143,60 +182,69 @@ export const alerts: AlertItem[] = [
   },
 ]
 
-export const users = [
+export const users: User[] = [
   {
     id: "1",
-    name: "John Doe",
-    email: "john.doe@aegis.com",
+    name: "Abebe Tekle",
+    email: "abebe.tekle@aegis.com",
     role: "Admin",
     status: "active",
     lastActive: "2 min ago",
-    avatar: "JD",
+    avatar: "AT",
   },
   {
     id: "2",
-    name: "Sarah Miller",
-    email: "sarah.miller@aegis.com",
-    role: "Staff",
+    name: "Almaz Belay",
+    email: "almaz.belay@aegis.com",
+    role: "Manager",
     status: "active",
     lastActive: "5 min ago",
-    avatar: "SM",
+    avatar: "AB",
   },
   {
     id: "3",
-    name: "Mike Johnson",
-    email: "mike.johnson@aegis.com",
+    name: "Kebede Assefa",
+    email: "kebede.assefa@aegis.com",
     role: "Staff",
     status: "active",
     lastActive: "1 hour ago",
-    avatar: "MJ",
+    avatar: "KA",
   },
   {
     id: "4",
-    name: "Emily Chen",
-    email: "emily.chen@aegis.com",
+    name: "Fatima Mohammed",
+    email: "fatima.mohammed@aegis.com",
     role: "Staff",
     status: "inactive",
     lastActive: "2 days ago",
-    avatar: "EC",
+    avatar: "FM",
   },
   {
     id: "5",
-    name: "David Wilson",
-    email: "david.wilson@aegis.com",
+    name: "Girma Yohannes",
+    email: "girma.yohannes@aegis.com",
     role: "Admin",
     status: "active",
     lastActive: "30 min ago",
-    avatar: "DW",
+    avatar: "GY",
+  },
+  {
+    id: "6",
+    name: "Selamawit Haile",
+    email: "selamawit.haile@aegis.com",
+    role: "Staff",
+    status: "active",
+    lastActive: "45 min ago",
+    avatar: "SH",
   },
 ]
 
-export const auditLogs = [
+export const auditLogs: AuditLog[] = [
   {
     id: "1",
     action: "BATCH_CREATED",
     description: "New batch created for Organic Eggs (12pk)",
-    user: "John Doe",
+    user: "Abebe Tekle",
     timestamp: "Apr 23, 2026 09:45 AM",
     details: { batchCode: "EGG-2024-0567", quantity: 120 },
   },
@@ -204,7 +252,7 @@ export const auditLogs = [
     id: "2",
     action: "STOCK_CONSUMED",
     description: "Stock consumed from Whole Milk 1L batch",
-    user: "Sarah Miller",
+    user: "Almaz Belay",
     timestamp: "Apr 23, 2026 09:30 AM",
     details: { batchCode: "MLK-2024-0892", quantity: 12 },
   },
@@ -212,7 +260,7 @@ export const auditLogs = [
     id: "3",
     action: "FIFO_OVERRIDE",
     description: "FIFO validation overridden for Chicken Breast",
-    user: "Mike Johnson",
+    user: "Kebede Assefa",
     timestamp: "Apr 23, 2026 09:15 AM",
     details: { batchCode: "CHK-2024-0789", reason: "Customer request" },
   },
@@ -220,7 +268,7 @@ export const auditLogs = [
     id: "4",
     action: "BATCH_UPDATED",
     description: "Batch location updated for Greek Yogurt 500g",
-    user: "John Doe",
+    user: "Abebe Tekle",
     timestamp: "Apr 23, 2026 08:50 AM",
     details: { batchCode: "YGT-2024-0334", oldLocation: "Storage", newLocation: "Cold Storage A" },
   },
@@ -236,7 +284,7 @@ export const auditLogs = [
     id: "6",
     action: "USER_LOGIN",
     description: "User logged into the system",
-    user: "Emily Chen",
+    user: "Fatima Mohammed",
     timestamp: "Apr 22, 2026 04:30 PM",
     details: { ipAddress: "192.168.1.45" },
   },
@@ -244,7 +292,7 @@ export const auditLogs = [
     id: "7",
     action: "BATCH_DELETED",
     description: "Expired batch removed from inventory",
-    user: "David Wilson",
+    user: "Girma Yohannes",
     timestamp: "Apr 22, 2026 03:15 PM",
     details: { batchCode: "APL-2024-0234", reason: "Expired" },
   },
